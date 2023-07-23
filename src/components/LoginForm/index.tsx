@@ -1,9 +1,6 @@
 import { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import axios from 'axios'
-import { useSnackbar, SnackbarOrigin } from 'notistack'
-import { useRouter } from 'next/navigation'
 import { LoadingButton } from '@mui/lab'
 import {
   TextField,
@@ -13,6 +10,8 @@ import {
   IconButton
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
+import { useUser } from '@/context/User'
+import { useSnackbar, SnackbarOrigin } from 'notistack'
 
 const validationSchema = yup.object({
   email: yup
@@ -28,10 +27,11 @@ const anchorOrigin: SnackbarOrigin = {
 }
 
 const LoginForm: React.FC = () => {
-  const { enqueueSnackbar } = useSnackbar()
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const { enqueueSnackbar } = useSnackbar()
+
+  const { login } = useUser()
 
   const handleClickShowPassword = () => setShowPassword(show => !show)
 
@@ -41,22 +41,18 @@ const LoginForm: React.FC = () => {
       password: ''
     },
     validationSchema: validationSchema,
-    onSubmit: values => {
+    onSubmit: async values => {
       const { email, password } = values
       setLoading(true)
-      axios
-        .post('/api/auth', { email, password })
-        .then(data => {
-          router.push('/register')
+      await login(email, password)
+        .finally(() => {
+          setLoading(false)
         })
-        .catch(error => {
+        .catch(() => {
           enqueueSnackbar('Usuário não cadastrado ou palavra passe errada ', {
             variant: 'error',
             anchorOrigin
           })
-        })
-        .finally(() => {
-          setLoading(false)
         })
     }
   })

@@ -4,8 +4,17 @@ import Image from 'next/image'
 import { Box, Container, Typography, Stack } from '@mui/material'
 import LoginForm from '@/components/LoginForm'
 import { MailOutline } from '@material-ui/icons'
+import { useRouter } from 'next/navigation'
+import { useUser } from '@/context/User'
 
 const Login: React.FC = () => {
+  const router = useRouter()
+  const { user } = useUser()
+
+  if (user) {
+    router.push('/update-user')
+  }
+
   return (
     <Container
       sx={{
