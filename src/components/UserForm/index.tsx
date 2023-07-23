@@ -312,7 +312,6 @@ const UserForm: React.FC<props> = ({ user }) => {
           <TextField
             InputLabelProps={{ shrink: true }}
             fullWidth
-            required
             id="password"
             name="password"
             type={showPassword ? 'text' : 'password'}

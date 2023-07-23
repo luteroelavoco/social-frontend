@@ -1,8 +1,13 @@
 import { useUser } from '@/context/User'
 import { LoadingComponent } from '@/components/LoadingComponent'
+import { useEffect } from 'react'
 
 function AuthPage({ children }: { children: JSX.Element }) {
-  const { user } = useUser()
+  const { user, getUser } = useUser()
+
+  useEffect(() => {
+    getUser()
+  }, [])
 
   if (!user) {
     return <LoadingComponent />

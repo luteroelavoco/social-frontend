@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useUser } from '@/context/User'
 import { LoadingComponent } from '@/components/LoadingComponent'
 import { redirect } from 'next/navigation'
 
 function AuthAdminPage({ children }: { children: JSX.Element }) {
-  const { user } = useUser()
+  const { user, getUser } = useUser()
+
+  useEffect(() => {
+    getUser()
+  }, [])
 
   if (!user) {
     return <LoadingComponent />

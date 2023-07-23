@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import Image from 'next/image'
 import { Box, Container, Typography, Stack } from '@mui/material'
 import LoginForm from '@/components/LoginForm'
@@ -9,11 +10,15 @@ import { useUser } from '@/context/User'
 
 const Login: React.FC = () => {
   const router = useRouter()
-  const { user } = useUser()
+  const { user, getUser } = useUser()
 
   if (user) {
     router.push('/update-user')
   }
+
+  useEffect(() => {
+    getUser()
+  }, [])
 
   return (
     <Container
