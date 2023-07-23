@@ -41,7 +41,12 @@ const UpdateUser: React.FC = () => {
               priority
             />
             <Typography
-              sx={{ fontSize: '28px', fontWeight: '700', marginTop: '16px' }}
+              sx={{
+                fontSize: { xs: '22px', sm: '28px' },
+                fontWeight: '700',
+                marginTop: '16px',
+                lineHeight: { xs: '22px', sm: '28px' }
+              }}
             >
               Atualizar informações do Usuário
             </Typography>
@@ -55,7 +60,7 @@ const UpdateUser: React.FC = () => {
                 variant="outlined"
                 onClick={() => router.push('/register')}
               >
-                Cadastrar novo usuário
+                Cadastrar usuário
               </Button>
             )}
             <Button

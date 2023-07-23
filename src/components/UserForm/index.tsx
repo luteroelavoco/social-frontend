@@ -125,7 +125,7 @@ const UserForm: React.FC<props> = ({ user }) => {
   return (
     <Box sx={{ width: '100%', my: '16px' }}>
       <form style={{ display: 'flex' }} onSubmit={formik.handleSubmit}>
-        <Stack sx={{ width: '100%' }} gap="24px">
+        <Stack sx={{ width: '100%' }} gap={{ xs: '16px', sm: '24px' }}>
           <Stack gap="8px">
             <Avatar src={formik.values.avatar} sx={{ width: 100, height: 100 }}>
               Foto
@@ -139,13 +139,17 @@ const UserForm: React.FC<props> = ({ user }) => {
               />
             )}
           </Stack>
-          <Stack direction="row" gap="8px">
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            gap={{ xs: '16px', sm: '8px' }}
+          >
             <TextField
               InputLabelProps={{ shrink: true }}
               required
               size="small"
               fullWidth
               label="Primeiro nome"
+              placeholder="Primeiro nome"
               id="firstName"
               name="firstName"
               value={formik.values.firstName}
@@ -162,6 +166,7 @@ const UserForm: React.FC<props> = ({ user }) => {
               size="small"
               fullWidth
               label="Ultimo nome"
+              placeholder="Ultimo nome"
               id="lastName"
               name="lastName"
               value={formik.values.lastName}
@@ -171,13 +176,17 @@ const UserForm: React.FC<props> = ({ user }) => {
               helperText={formik.touched.lastName && formik.errors.lastName}
             />
           </Stack>
-          <Stack direction="row" gap="8px">
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            gap={{ xs: '16px', sm: '8px' }}
+          >
             <FormControl fullWidth>
               <InputLabel id="select-label-role">Nível</InputLabel>
               <Select
                 required
                 disabled={isEditing}
                 size="small"
+                placeholder="Nível"
                 labelId="select-label-role"
                 id="select-role"
                 value={formik.values.role}
@@ -193,6 +202,7 @@ const UserForm: React.FC<props> = ({ user }) => {
               size="small"
               fullWidth
               required
+              placeholder="Email"
               disabled={isEditing}
               label="Email"
               id="email"
@@ -204,13 +214,17 @@ const UserForm: React.FC<props> = ({ user }) => {
               helperText={formik.touched.email && formik.errors.email}
             />
           </Stack>
-          <Stack direction="row" gap="8px">
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            gap={{ xs: '16px', sm: '8px' }}
+          >
             <TextField
               required
               InputLabelProps={{ shrink: true }}
               size="small"
               fullWidth
               label="Cep"
+              placeholder="Cep"
               id="cep"
               name="cep"
               value={formik.values.cep}
@@ -224,6 +238,7 @@ const UserForm: React.FC<props> = ({ user }) => {
               size="small"
               fullWidth
               label="Estado"
+              placeholder="Estado"
               id="state"
               name="state"
               value={formik.values.state}
@@ -233,12 +248,16 @@ const UserForm: React.FC<props> = ({ user }) => {
               helperText={formik.touched.state && formik.errors.state}
             />
           </Stack>
-          <Stack direction="row" gap="8px">
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            gap={{ xs: '16px', sm: '8px' }}
+          >
             <TextField
               InputLabelProps={{ shrink: true }}
               size="small"
               fullWidth
               label="Cidade"
+              placeholder="Cidade"
               id="city"
               name="city"
               value={formik.values.city}
@@ -252,6 +271,7 @@ const UserForm: React.FC<props> = ({ user }) => {
               size="small"
               fullWidth
               label="Bairro"
+              placeholder="Bairro"
               id="neighborhood"
               name="neighborhood"
               value={formik.values.neighborhood}
@@ -266,12 +286,16 @@ const UserForm: React.FC<props> = ({ user }) => {
               }
             />
           </Stack>
-          <Stack direction="row" gap="8px">
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            gap={{ xs: '16px', sm: '8px' }}
+          >
             <TextField
               InputLabelProps={{ shrink: true }}
               size="small"
               fullWidth
               label="Rua"
+              placeholder="Rua"
               id="street"
               name="street"
               value={formik.values.street}
@@ -285,6 +309,7 @@ const UserForm: React.FC<props> = ({ user }) => {
               size="small"
               fullWidth
               label="Número"
+              placeholder="Número"
               id="number"
               name="number"
               value={formik.values.number}
@@ -298,6 +323,7 @@ const UserForm: React.FC<props> = ({ user }) => {
             InputLabelProps={{ shrink: true }}
             size="small"
             fullWidth
+            placeholder="Complemento"
             label="Complemento"
             id="complement"
             name="complement"
@@ -316,6 +342,7 @@ const UserForm: React.FC<props> = ({ user }) => {
             name="password"
             type={showPassword ? 'text' : 'password'}
             label="Senha"
+            placeholder="senha"
             size="small"
             value={formik.values.password}
             onChange={formik.handleChange}

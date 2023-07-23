@@ -38,7 +38,12 @@ const Register: React.FC = () => {
               priority
             />
             <Typography
-              sx={{ fontSize: '28px', fontWeight: '700', marginTop: '16px' }}
+              sx={{
+                fontSize: { xs: '22px', sm: '28px' },
+                fontWeight: '700',
+                marginTop: '16px',
+                lineHeight: { xs: '22px', sm: '28px' }
+              }}
             >
               Cadastrar um novo usuário
             </Typography>

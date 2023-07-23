@@ -1,15 +1,10 @@
 'use client'
 
-import { Metadata } from 'next'
 import React, { useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useSnackbar } from 'notistack'
 import { useUser } from '@/context/User'
 import { LoadingComponent } from '@/components/LoadingComponent'
-
-export const metadata: Metadata = {
-  title: 'Validar email'
-}
 
 const VerifyEmail: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar()

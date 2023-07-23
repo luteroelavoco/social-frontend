@@ -26,7 +26,7 @@ const Login: React.FC = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh'
+        height: '90vh'
       }}
     >
       <Box
@@ -34,7 +34,7 @@ const Login: React.FC = () => {
           position: 'relative',
           width: '90%',
           maxWidth: '500px',
-          height: '500px',
+          height: '530px',
           background: 'white',
           p: '32px',
           borderRadius: '16px'
@@ -49,11 +49,17 @@ const Login: React.FC = () => {
             priority
           />
           <Typography
-            sx={{ fontSize: '28px', fontWeight: '700', marginTop: '16px' }}
+            sx={{
+              fontSize: '28px',
+              fontWeight: '700',
+              marginTop: '16px',
+              textAlign: 'center',
+              lineHeight: '26px'
+            }}
           >
             Entrar na sua conta
           </Typography>
-          <Typography sx={{ fontSize: '14px', my: '8px' }}>
+          <Typography sx={{ fontSize: '14px', my: '8px', textAlign: 'center' }}>
             Faça login na sua conta para alterar seus dados.
           </Typography>
           <LoginForm />
