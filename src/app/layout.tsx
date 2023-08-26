@@ -10,6 +10,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import { theme } from '@/styles/theme'
 import { SnackbarProvider } from 'notistack'
 import { UserProvider } from '@/context/User'
+import { BookTradeProvider } from '@/context/BookTrade'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
-        <ThemeProvider theme={theme}>
-          <SnackbarProvider maxSnack={3}>
-            <body className={inter.className}>{children}</body>
-          </SnackbarProvider>
-        </ThemeProvider>
+        <BookTradeProvider>
+          <ThemeProvider theme={theme}>
+            <SnackbarProvider maxSnack={3}>
+              <body className={inter.className}>{children}</body>
+            </SnackbarProvider>
+          </ThemeProvider>
+        </BookTradeProvider>
       </UserProvider>
     </html>
   )
