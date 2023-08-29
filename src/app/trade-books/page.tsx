@@ -39,7 +39,7 @@ const TradeBooks: React.FC = () => {
             Solicitações de troca
           </Typography>
           <Divider sx={{ borderWidth: 1 }} />
-          {booksTrade.reverse().map(bookTrade => (
+          {booksTrade.map(bookTrade => (
             <TradeBookCard key={bookTrade._id} bookTrade={bookTrade} />
           ))}
         </Box>

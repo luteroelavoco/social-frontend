@@ -26,13 +26,12 @@ const TradeBookCard: React.FC<props> = ({ bookTrade }) => {
   const userRequestAnswered = isUserRequest && status != 'pending'
   const requestedUserPending = !isUserRequest && status == 'pending'
   const requestedUserAnswered = !isUserRequest && status != 'pending'
+
   const statusSituation = {
     pending: 'solicitou',
     accepted: 'aceitou',
     rejected: 'rejeitou'
   }
-  const currentAvatarUser =
-    userRequestPending || requestedUserAnswered ? user : fromUser
 
   const handleRejectSolicitation = async () => {
     rejectBookTrade(bookTrade._id)
@@ -72,24 +71,46 @@ const TradeBookCard: React.FC<props> = ({ bookTrade }) => {
       })
   }
 
+  const currentAvatarUser = () => {
+    if (userRequestPending || requestedUserAnswered) return user
+    if (userRequestAnswered) return bookTrade.toUser
+    return bookTrade.fromUser
+  }
+
   return (
     <>
       <Stack direction="row" gap={2} my={2} px="24px">
         <Box>
           <Avatar
             sx={{ width: '50px', height: '50px' }}
-            alt={currentAvatarUser?.firstName}
-            src={currentAvatarUser?.avatar}
+            alt={currentAvatarUser()?.firstName}
+            src={currentAvatarUser()?.avatar}
           />
         </Box>
         <Stack direction="column" gap="4px">
           <Typography>
-            <strong>
-              {userRequestPending || requestedUserAnswered
-                ? 'Você'
-                : `${fromUser.firstName} ${fromUser.lastName}`}
-            </strong>{' '}
-            {statusSituation[status]} uma troca do livro
+            {(userRequestPending || requestedUserAnswered) && (
+              <>
+                <strong>Você</strong> {statusSituation[status]}{' '}
+              </>
+            )}
+            {userRequestAnswered && (
+              <>
+                <strong>
+                  {toUser.firstName} {toUser.lastName}
+                </strong>{' '}
+                {statusSituation[status]}{' '}
+              </>
+            )}
+            {requestedUserPending && (
+              <>
+                <strong>
+                  {fromUser.firstName} {fromUser.lastName}
+                </strong>{' '}
+                {statusSituation[status]}{' '}
+              </>
+            )}
+            uma troca do livro
             <strong>
               {' '}
               {offeredBook.title} ({offeredBook.author})
@@ -102,7 +123,7 @@ const TradeBookCard: React.FC<props> = ({ bookTrade }) => {
             .
           </Typography>
           <Typography>{moment(updatedAt).fromNow()}</Typography>
-          {requestedUserPending && (
+          {!isUserRequest && status == 'pending' && (
             <Stack direction="row" gap="8px" mt={2}>
               <Button onClick={handleAcceptSolicitation} variant="contained">
                 Aceitar
