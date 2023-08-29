@@ -35,17 +35,6 @@ export function BookTradeProvider({ children }: { children: React.ReactNode }) {
   const createBook = async (values: Book) => {
     await api.post('/books', values)
   }
-
-  const acceptBookTrade = async (proposalId: string) => {
-    const { data } = await api.put(`/trade-proposals/${proposalId}/accept`)
-    updateBooksTrade(data)
-  }
-
-  const rejectBookTrade = async (proposalId: string) => {
-    const { data } = await api.put(`/trade-proposals/${proposalId}/reject`)
-    updateBooksTrade(data)
-  }
-
   const createTradeBook = async ({
     offeredBook,
     desiredBook
@@ -73,17 +62,18 @@ export function BookTradeProvider({ children }: { children: React.ReactNode }) {
   const handleGetBooksTrade = async () => {
     setBooksTrade(await getUserBooksTrade())
   }
+  const acceptBookTrade = async (proposalId: string) => {
+    await api.put(`/trade-proposals/${proposalId}/accept`)
+    handleGetBooksTrade()
+  }
+
+  const rejectBookTrade = async (proposalId: string) => {
+    await api.put(`/trade-proposals/${proposalId}/reject`)
+    handleGetBooksTrade()
+  }
 
   const getUserBooks = () => {
     return books.filter(book => (book.owner as User)._id === user?._id)
-  }
-
-  const updateBooksTrade = (newBookTrade: BookTrade) => {
-    setBooksTrade(oldBooksTrade =>
-      oldBooksTrade.map(oldBookTrade =>
-        oldBookTrade._id == newBookTrade._id ? newBookTrade : oldBookTrade
-      )
-    )
   }
 
   useEffect(() => {

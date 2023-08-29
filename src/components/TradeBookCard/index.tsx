@@ -1,10 +1,11 @@
+import 'moment/locale/pt-br'
+import moment from 'moment'
 import { useBookTrade } from '@/context/BookTrade'
 import { useUser } from '@/context/User'
 import { BookTrade } from '@/types/bookTrade'
 import { User } from '@/types/user'
 import { Avatar, Box, Button, Stack, Typography, Divider } from '@mui/material'
 import { useSnackbar, SnackbarOrigin } from 'notistack'
-import moment from 'moment'
 
 const anchorOrigin: SnackbarOrigin = {
   vertical: 'top',
@@ -15,13 +16,13 @@ interface props {
   bookTrade: BookTrade
 }
 const TradeBookCard: React.FC<props> = ({ bookTrade }) => {
+  moment.locale('pt-br')
   const { fromUser, toUser, status, offeredBook, desiredBook, updatedAt } =
     bookTrade
   const { enqueueSnackbar } = useSnackbar()
   const { user } = useUser()
   const { acceptBookTrade, rejectBookTrade } = useBookTrade()
   const isUserRequest = user?._id === (bookTrade.fromUser as User)._id
-
   const userRequestPending = isUserRequest && status == 'pending'
   const userRequestAnswered = isUserRequest && status != 'pending'
   const requestedUserPending = !isUserRequest && status == 'pending'
@@ -87,7 +88,7 @@ const TradeBookCard: React.FC<props> = ({ bookTrade }) => {
             src={currentAvatarUser()?.avatar}
           />
         </Box>
-        <Stack direction="column" gap="4px">
+        <Stack direction="column">
           <Typography>
             {(userRequestPending || requestedUserAnswered) && (
               <>
@@ -122,7 +123,9 @@ const TradeBookCard: React.FC<props> = ({ bookTrade }) => {
             </strong>
             .
           </Typography>
-          <Typography>{moment(updatedAt).fromNow()}</Typography>
+          <Typography sx={{ opacity: '0.9', fontSize: 12 }}>
+            {moment(updatedAt).locale('pt-br').fromNow()}
+          </Typography>
           {!isUserRequest && status == 'pending' && (
             <Stack direction="row" gap="8px" mt={2}>
               <Button onClick={handleAcceptSolicitation} variant="contained">
