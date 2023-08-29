@@ -53,7 +53,9 @@ export default function SearchAppBar() {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleSearch(event.target.value)
     router.push('/available-books')
-    event.target.focus()
+    setTimeout(() => {
+      event.target.focus()
+    }, 1000)
   }
   return (
     <Search>
