@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { Box, Container, Typography, Stack, Button } from '@mui/material'
 import BookForm from '@/components/BookForm'
 import AuthPage from '@/wrapper/Auth'
@@ -27,13 +26,6 @@ const CreateBook: React.FC = () => {
           }}
         >
           <Stack sx={{ display: 'flex', alignItems: 'center' }}>
-            <Image
-              src="/social-logo.svg"
-              alt="socialsa Logo"
-              width={200}
-              height={60}
-              priority
-            />
             <Typography
               sx={{
                 fontSize: { xs: '22px', sm: '28px' },

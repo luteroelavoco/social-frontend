@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { Box, Container, Typography, Stack, Button } from '@mui/material'
 import UserForm from '@/components/UserForm'
 import { useUser } from '@/context/User'
@@ -33,13 +32,6 @@ const UpdateUser: React.FC = () => {
           }}
         >
           <Stack sx={{ display: 'flex', alignItems: 'center' }}>
-            <Image
-              src="/social-logo.svg"
-              alt="socialsa Logo"
-              width={200}
-              height={60}
-              priority
-            />
             <Typography
               sx={{
                 fontSize: { xs: '22px', sm: '28px' },

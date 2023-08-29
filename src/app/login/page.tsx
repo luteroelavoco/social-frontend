@@ -13,7 +13,7 @@ const Login: React.FC = () => {
   const { user, getUser } = useUser()
 
   if (user) {
-    router.push('/update-user')
+    router.push('/available-books')
   }
 
   useEffect(() => {
