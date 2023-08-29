@@ -1,23 +1,12 @@
 'use client'
 
-import {
-  Box,
-  Container,
-  Typography,
-  Stack,
-  Button,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions
-} from '@mui/material'
+import { Box, Container, Typography, Grid } from '@mui/material'
 import AuthPage from '@/wrapper/Auth'
 import { useBookTrade } from '@/context/BookTrade'
 import BookCard from '@/components/BookCard'
 
 const AvailableBooks: React.FC = () => {
-  const { books } = useBookTrade()
+  const { books, search } = useBookTrade()
 
   return (
     <AuthPage>
@@ -26,6 +15,8 @@ const AvailableBooks: React.FC = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          alignContent: 'center',
+          flexDirection: 'column',
           my: '32px'
         }}
       >
@@ -34,6 +25,13 @@ const AvailableBooks: React.FC = () => {
             <BookCard key={book._id} book={book}></BookCard>
           ))}
         </Grid>
+        {books.length === 0 && search && (
+          <Box>
+            <Typography>
+              Infelizmente não encontramos o livro "{search}".
+            </Typography>
+          </Box>
+        )}
       </Container>
     </AuthPage>
   )
