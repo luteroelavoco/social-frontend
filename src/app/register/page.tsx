@@ -51,13 +51,6 @@ const Register: React.FC = () => {
               Preencha todos os campos para cadastrar novo usuario.
             </Typography>
             <UserForm />
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => router.push('/update-user')}
-            >
-              Alterar meus dados
-            </Button>
           </Stack>
         </Box>
       </Container>

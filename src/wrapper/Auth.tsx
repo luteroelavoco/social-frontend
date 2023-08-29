@@ -1,6 +1,7 @@
 import { useUser } from '@/context/User'
 import { LoadingComponent } from '@/components/LoadingComponent'
 import { useEffect } from 'react'
+import Header from '@/components/Header'
 
 function AuthPage({ children }: { children: JSX.Element }) {
   const { user, getUser } = useUser()
@@ -13,7 +14,12 @@ function AuthPage({ children }: { children: JSX.Element }) {
     return <LoadingComponent />
   }
 
-  return <> {children}</>
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  )
 }
 
 export default AuthPage

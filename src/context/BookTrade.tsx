@@ -17,10 +17,11 @@ interface BookTradeContextType {
     offeredBook: string
     desiredBook: string
   }) => Promise<void>
-  availableBooks: () => Promise<Book[]>
   getUserBooks: () => Book[]
   acceptBookTrade: (proposalId: string) => Promise<void>
   rejectBookTrade: (proposalId: string) => Promise<void>
+  handleSearch: (search: string) => void
+  search: string
 }
 
 export const BookTradeContext = createContext<BookTradeContextType>(
@@ -28,6 +29,7 @@ export const BookTradeContext = createContext<BookTradeContextType>(
 )
 
 export function BookTradeProvider({ children }: { children: React.ReactNode }) {
+  const [search, setSearch] = useState('')
   const [books, setBooks] = useState<Book[]>([])
   const [booksTrade, setBooksTrade] = useState<BookTrade[]>([])
   const { user } = useUser()
@@ -45,8 +47,8 @@ export function BookTradeProvider({ children }: { children: React.ReactNode }) {
     await api.post('/trade-proposals', { offeredBook, desiredBook })
   }
 
-  const availableBooks = async () => {
-    const getBooks = await api.get('/books/available?search=')
+  const availableBooks = async (search: string) => {
+    const getBooks = await api.get(`/books/available?search=${search}`)
     return getBooks.data
   }
 
@@ -55,8 +57,8 @@ export function BookTradeProvider({ children }: { children: React.ReactNode }) {
     return getTradeBooks.data
   }
 
-  const handleGetAvailableBooks = async () => {
-    setBooks(await availableBooks())
+  const handleGetAvailableBooks = async (search: string = '') => {
+    setBooks(await availableBooks(search))
   }
 
   const handleGetBooksTrade = async () => {
@@ -76,6 +78,11 @@ export function BookTradeProvider({ children }: { children: React.ReactNode }) {
     return books.filter(book => (book.owner as User)._id === user?._id)
   }
 
+  const handleSearch = (search: string) => {
+    setSearch(search)
+    handleGetAvailableBooks(search)
+  }
+
   useEffect(() => {
     if (!user) return
     handleGetAvailableBooks()
@@ -86,13 +93,14 @@ export function BookTradeProvider({ children }: { children: React.ReactNode }) {
     <BookTradeContext.Provider
       value={{
         createBook,
-        availableBooks,
         books,
         getUserBooks,
         createTradeBook,
         booksTrade,
         acceptBookTrade,
-        rejectBookTrade
+        rejectBookTrade,
+        handleSearch,
+        search
       }}
     >
       {children}
@@ -104,22 +112,24 @@ export function useBookTrade() {
   const context = useContext(BookTradeContext)
   const {
     createBook,
-    availableBooks,
     books,
     getUserBooks,
     createTradeBook,
     booksTrade,
     acceptBookTrade,
-    rejectBookTrade
+    rejectBookTrade,
+    handleSearch,
+    search
   } = context
   return {
     createBook,
-    availableBooks,
     books,
     getUserBooks,
     createTradeBook,
     booksTrade,
     acceptBookTrade,
-    rejectBookTrade
+    rejectBookTrade,
+    handleSearch,
+    search
   }
 }

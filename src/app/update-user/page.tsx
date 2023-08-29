@@ -63,14 +63,6 @@ const UpdateUser: React.FC = () => {
                 Cadastrar usuário
               </Button>
             )}
-            <Button
-              sx={{ mt: isAdmin ? '16px' : '0px' }}
-              onClick={logout}
-              fullWidth
-              variant="outlined"
-            >
-              Encerrar sessão
-            </Button>
           </Stack>
         </Box>
       </Container>

@@ -30,7 +30,7 @@ const AvailableBooks: React.FC = () => {
         }}
       >
         <Grid container spacing={2}>
-          {books.reverse().map(book => (
+          {books.map(book => (
             <BookCard key={book._id} book={book}></BookCard>
           ))}
         </Grid>
