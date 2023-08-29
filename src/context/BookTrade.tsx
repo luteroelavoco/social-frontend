@@ -87,9 +87,10 @@ export function BookTradeProvider({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
+    if (!user) return
     handleGetAvailableBooks()
     handleGetBooksTrade()
-  }, [])
+  }, [user])
 
   return (
     <BookTradeContext.Provider

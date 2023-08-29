@@ -25,6 +25,7 @@
     "eslint": "^8.45.0",
     "eslint-config-next": "13.4.11",
     "formik": "^2.4.2",
+    "moment": "^2.29.4",
     "next": "13.4.11",
     "notistack": "^3.0.1",
     "react": "18.2.0",
