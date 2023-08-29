@@ -33,7 +33,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     updateApiToken(token)
     setUser(user)
     saveToken(token)
-    router.push('/update-user')
+    router.push('/available-books')
   }
   const login = async (email: string, password: string) => {
     return api.post('/auth', { email, password }).then(response => {

@@ -16,7 +16,7 @@ import AuthPage from '@/wrapper/Auth'
 import { useBookTrade } from '@/context/BookTrade'
 import BookCard from '@/components/BookCard'
 
-const AvailableBooks: React.FC = () => {
+const Notifications: React.FC = () => {
   const { books } = useBookTrade()
 
   return (
@@ -39,4 +39,4 @@ const AvailableBooks: React.FC = () => {
   )
 }
 
-export default AvailableBooks
+export default Notifications

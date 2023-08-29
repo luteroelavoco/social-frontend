@@ -3,11 +3,11 @@
 import Image from 'next/image'
 import { Box, Container, Typography, Stack, Button } from '@mui/material'
 import BookForm from '@/components/BookForm'
-import AuthAdminPage from '@/wrapper/AuthAdmin'
+import AuthPage from '@/wrapper/Auth'
 
 const CreateBook: React.FC = () => {
   return (
-    <AuthAdminPage>
+    <AuthPage>
       <Container
         sx={{
           display: 'flex',
@@ -51,7 +51,7 @@ const CreateBook: React.FC = () => {
           </Stack>
         </Box>
       </Container>
-    </AuthAdminPage>
+    </AuthPage>
   )
 }
 
