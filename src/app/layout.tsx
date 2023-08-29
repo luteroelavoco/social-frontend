@@ -11,6 +11,7 @@ import { theme } from '@/styles/theme'
 import { SnackbarProvider } from 'notistack'
 import { UserProvider } from '@/context/User'
 import { BookTradeProvider } from '@/context/BookTrade'
+import Header from '@/components/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,7 +26,10 @@ export default function RootLayout({
         <BookTradeProvider>
           <ThemeProvider theme={theme}>
             <SnackbarProvider maxSnack={3}>
-              <body className={inter.className}>{children}</body>
+              <body className={inter.className}>
+                <Header />
+                {children}
+              </body>
             </SnackbarProvider>
           </ThemeProvider>
         </BookTradeProvider>

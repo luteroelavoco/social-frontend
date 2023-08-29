@@ -73,7 +73,7 @@ function Header() {
     }
     router.push(link)
   }
-
+  if (!user) return <div />
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
