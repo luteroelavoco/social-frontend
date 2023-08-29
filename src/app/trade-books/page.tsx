@@ -21,10 +21,10 @@ const TradeBooks: React.FC = () => {
         <Box
           sx={{
             position: 'relative',
-            width: '90%',
+            width: '100%',
             maxWidth: '650px',
             background: 'white',
-            py: '16px',
+            py: { xs: '8px', sm: '16px' },
             borderRadius: '8px'
           }}
         >
@@ -32,7 +32,7 @@ const TradeBooks: React.FC = () => {
             sx={{
               fontSize: '24px',
               fontWeight: 'bold',
-              px: '24px',
+              px: { xs: '8px', sm: '24px' },
               mb: '8px'
             }}
           >

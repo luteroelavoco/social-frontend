@@ -80,7 +80,12 @@ const TradeBookCard: React.FC<props> = ({ bookTrade }) => {
 
   return (
     <>
-      <Stack direction="row" gap={2} my={2} px="24px">
+      <Stack
+        direction="row"
+        gap={{ xs: 1, sm: 2 }}
+        my={2}
+        px={{ xs: '8px', sm: '24px' }}
+      >
         <Box>
           <Avatar
             sx={{ width: '50px', height: '50px' }}
