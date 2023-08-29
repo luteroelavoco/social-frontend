@@ -3,6 +3,7 @@ import { styled, alpha } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
 import { useBookTrade } from '@/context/BookTrade'
+import { useRouter } from 'next/navigation'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -47,9 +48,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   const { handleSearch, search } = useBookTrade()
+  const router = useRouter()
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleSearch(event.target.value)
+    router.push('/available-books')
   }
   return (
     <Search>
