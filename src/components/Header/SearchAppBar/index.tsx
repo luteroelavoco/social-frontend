@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { styled, alpha } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
@@ -53,6 +53,7 @@ export default function SearchAppBar() {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleSearch(event.target.value)
     router.push('/available-books')
+    event.target.focus()
   }
   return (
     <Search>
