@@ -45,6 +45,7 @@ const settings = [
 
 function Header() {
   const { logout, user } = useUser()
+
   const router = useRouter()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -73,9 +74,14 @@ function Header() {
     }
     router.push(link)
   }
-  if (!user) return <div />
+
   return (
-    <AppBar position="static">
+    <AppBar
+      sx={{
+        display: !user ? 'none' : 'initial'
+      }}
+      position="static"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
