@@ -17,7 +17,7 @@ import {
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
 import { User } from '@/types/user'
-import api from '@/services/api'
+import { userApi } from '@/services/api'
 import { useUser } from '@/context/User'
 import { STATIC_INITIAL_VALUE } from '@/utils/formUser'
 import { UserFormDTO } from '@/types/userFormDTO'
@@ -112,13 +112,15 @@ const UserForm: React.FC<props> = ({ user }) => {
     const cep = e.target.value
     formik.setFieldValue('cep', cep)
     if (cep.length > 6) {
-      api.get(`https://brasilapi.com.br/api/cep/v1/${cep}`).then(response => {
-        const { data } = response
-        formik.setFieldValue('state', data.state)
-        formik.setFieldValue('city', data.city)
-        formik.setFieldValue('neighborhood', data.neighborhood)
-        formik.setFieldValue('street', data.street)
-      })
+      userApi
+        .get(`https://brasilapi.com.br/api/cep/v1/${cep}`)
+        .then(response => {
+          const { data } = response
+          formik.setFieldValue('state', data.state)
+          formik.setFieldValue('city', data.city)
+          formik.setFieldValue('neighborhood', data.neighborhood)
+          formik.setFieldValue('street', data.street)
+        })
     }
   }
 
