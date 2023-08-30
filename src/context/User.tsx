@@ -8,7 +8,7 @@ import React, {
 
 import { useRouter } from 'next/navigation'
 import { User } from '@/types/user'
-import api from '@/services/api'
+import { userApi } from '@/services/api'
 import { getToken, removeToken, saveToken } from '@/utils/user'
 import { UserFormDTO } from '@/types/userFormDTO'
 
@@ -36,14 +36,14 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     router.push('/available-books')
   }
   const login = async (email: string, password: string) => {
-    return api.post('/auth', { email, password }).then(response => {
+    return userApi.post('/auth', { email, password }).then(response => {
       const { data } = response
       handleLogin(data.user, data.token)
     })
   }
 
   const verifyEmail = async (token: string) => {
-    return api.put('/users/verify', { token }).then(response => {
+    return userApi.put('/users/verify', { token }).then(response => {
       const { data } = response
       handleLogin(data.user, data.token)
     })
@@ -71,7 +71,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
-    return api.put(`/users/${user._id}`, newUser).then(response => {
+    return userApi.put(`/users/${user._id}`, newUser).then(response => {
       const { data } = response
       setUser(data)
     })
@@ -92,7 +92,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     formData.append('street', values.street)
     formData.append('number', `${values.number}`)
     formData.append('complement', `${values.complement}`)
-    return api.post('/users', formData).then(() => {})
+    return userApi.post('/users', formData).then(() => {})
   }
 
   const getUser = async () => {
@@ -101,7 +101,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       router.push('/login')
       return
     }
-    await api
+    await userApi
       .post('/users/refresh')
       .then(response => {
         const { data } = response
@@ -114,7 +114,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }
 
   const updateApiToken = (token: string) => {
-    api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    userApi.defaults.headers.common['Authorization'] = `Bearer ${token}`
   }
 
   return (

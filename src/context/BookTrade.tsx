@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 
 import { Book } from '@/types/book'
-import api from '@/services/api'
+import { tradeBookApi } from '@/services/api'
 import { useUser } from './User'
 import { User } from '@/types/user'
 import { BookTrade } from '@/types/bookTrade'
@@ -35,7 +35,7 @@ export function BookTradeProvider({ children }: { children: React.ReactNode }) {
   const { user } = useUser()
 
   const createBook = async (values: Book) => {
-    await api.post('/books', values)
+    await tradeBookApi.post('/books', values)
   }
   const createTradeBook = async ({
     offeredBook,
@@ -44,16 +44,18 @@ export function BookTradeProvider({ children }: { children: React.ReactNode }) {
     offeredBook: string
     desiredBook: string
   }) => {
-    await api.post('/trade-proposals', { offeredBook, desiredBook })
+    await tradeBookApi.post('/trade-proposals', { offeredBook, desiredBook })
   }
 
   const availableBooks = async (search: string) => {
-    const getBooks = await api.get(`/books/available?search=${search}`)
+    const getBooks = await tradeBookApi.get(`/books/available?search=${search}`)
     return getBooks.data
   }
 
   const getUserBooksTrade = async () => {
-    const getTradeBooks = await api.get(`/trade-proposals/user/${user?._id}`)
+    const getTradeBooks = await tradeBookApi.get(
+      `/trade-proposals/user/${user?._id}`
+    )
     return getTradeBooks.data
   }
 
@@ -65,12 +67,12 @@ export function BookTradeProvider({ children }: { children: React.ReactNode }) {
     setBooksTrade(await getUserBooksTrade())
   }
   const acceptBookTrade = async (proposalId: string) => {
-    await api.put(`/trade-proposals/${proposalId}/accept`)
+    await tradeBookApi.put(`/trade-proposals/${proposalId}/accept`)
     handleGetBooksTrade()
   }
 
   const rejectBookTrade = async (proposalId: string) => {
-    await api.put(`/trade-proposals/${proposalId}/reject`)
+    await tradeBookApi.put(`/trade-proposals/${proposalId}/reject`)
     handleGetBooksTrade()
   }
 
