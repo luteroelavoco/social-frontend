@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 import { useUser } from '@/context/User'
 
 const AvailableBooks: React.FC = () => {
-  const { books, search, handleGetAvailableBooks, user } = useBookTrade()
+  const { books, search, handleGetAvailableBooks } = useBookTrade()
   const { user } = useUser()
 
   useEffect(() => {
