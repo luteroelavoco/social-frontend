@@ -21,6 +21,8 @@ interface BookTradeContextType {
   acceptBookTrade: (proposalId: string) => Promise<void>
   rejectBookTrade: (proposalId: string) => Promise<void>
   handleSearch: (search: string) => void
+  handleGetAvailableBooks: (search?: string) => Promise<void>
+  handleGetBooksTrade: (search?: string) => Promise<void>
   search: string
 }
 
@@ -102,7 +104,9 @@ export function BookTradeProvider({ children }: { children: React.ReactNode }) {
         acceptBookTrade,
         rejectBookTrade,
         handleSearch,
-        search
+        search,
+        handleGetAvailableBooks,
+        handleGetBooksTrade
       }}
     >
       {children}
@@ -121,7 +125,9 @@ export function useBookTrade() {
     acceptBookTrade,
     rejectBookTrade,
     handleSearch,
-    search
+    search,
+    handleGetAvailableBooks,
+    handleGetBooksTrade
   } = context
   return {
     createBook,
@@ -132,6 +138,8 @@ export function useBookTrade() {
     acceptBookTrade,
     rejectBookTrade,
     handleSearch,
-    search
+    search,
+    handleGetAvailableBooks,
+    handleGetBooksTrade
   }
 }

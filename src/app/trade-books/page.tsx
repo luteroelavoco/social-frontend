@@ -1,12 +1,20 @@
 'use client'
 
+import { useEffect } from 'react'
 import { Box, Container, Typography, Divider } from '@mui/material'
 import AuthPage from '@/wrapper/Auth'
 import { useBookTrade } from '@/context/BookTrade'
 import TradeBookCard from '@/components/TradeBookCard'
+import { useUser } from '@/context/User'
 
 const TradeBooks: React.FC = () => {
-  const { booksTrade } = useBookTrade()
+  const { booksTrade, handleGetBooksTrade } = useBookTrade()
+  const { user } = useUser()
+
+  useEffect(() => {
+    if (!user) return
+    handleGetBooksTrade()
+  }, [user])
 
   return (
     <AuthPage>

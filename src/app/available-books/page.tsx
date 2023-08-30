@@ -4,10 +4,17 @@ import { Box, Container, Typography, Grid } from '@mui/material'
 import AuthPage from '@/wrapper/Auth'
 import { useBookTrade } from '@/context/BookTrade'
 import BookCard from '@/components/BookCard'
+import { useEffect } from 'react'
+import { useUser } from '@/context/User'
 
 const AvailableBooks: React.FC = () => {
-  const { books, search } = useBookTrade()
+  const { books, search, handleGetAvailableBooks, user } = useBookTrade()
+  const { user } = useUser()
 
+  useEffect(() => {
+    if (!user) return
+    handleGetAvailableBooks()
+  }, [user])
   return (
     <AuthPage>
       <Container
