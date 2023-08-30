@@ -28,7 +28,7 @@ const AvailableBooks: React.FC = () => {
         {books.length === 0 && search && (
           <Box>
             <Typography>
-              Infelizmente não encontramos o livro "{search}".
+              Infelizmente não encontramos o livro &quot;{search}&quot;.
             </Typography>
           </Box>
         )}
