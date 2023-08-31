@@ -60,6 +60,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       firstName: user.firstName,
       lastName: user.lastName,
       password: user.password,
+      avatar: user.avatar,
       address: {
         state: user.state,
         city: user.city,
