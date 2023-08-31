@@ -13,7 +13,7 @@ const Login: React.FC = () => {
   const { user, getUser } = useUser()
 
   if (user) {
-    router.push('/available-books')
+    router.push('/')
   }
 
   useEffect(() => {
@@ -42,10 +42,10 @@ const Login: React.FC = () => {
       >
         <Stack sx={{ display: 'flex', alignItems: 'center' }}>
           <Image
-            src="/social-logo.svg"
-            alt="socialsa Logo"
+            src="/logo.png"
+            alt="social Logo"
             width={200}
-            height={60}
+            height={100}
             priority
           />
           <Typography

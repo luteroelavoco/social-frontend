@@ -25,7 +25,7 @@ const pages = [
   },
   {
     label: 'Livros disponiveis',
-    link: '/available-books'
+    link: '/'
   },
   {
     label: 'Solicitações de troca',

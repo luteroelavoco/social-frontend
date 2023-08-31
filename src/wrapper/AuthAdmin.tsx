@@ -14,7 +14,7 @@ function AuthAdminPage({ children }: { children: JSX.Element }) {
     return <LoadingComponent />
   }
 
-  if (user.role === 'user') return redirect('/available-books')
+  if (user.role === 'user') return redirect('/')
 
   return <> {children}</>
 }
